@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 db = mysql.connector.connect(
     host="localhost",
-    user="MyProject",
-    password="Shiv8636",
+    user="user/root",
+    password="psss",
     database="evalidate"
 )
 cursor = db.cursor()
@@ -183,3 +183,4 @@ def generate_report():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
