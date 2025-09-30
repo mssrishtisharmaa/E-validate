@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #2f3640;
+      text-align: center;
+    }
+
+    .status-box {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .status-box.error {
+      background-color: #ffe6e6;
+      border: 1px solid #e84118;
+      color: #e84118;
+    }
+
+    .status-box.success {
+      background-color: #eafbea;
+      border: 1px solid #44bd32;
+      color: #44bd32;
+    }
+
+    .product-data {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #dcdde1;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2f3640;
+      color: white;
+      width: 30%;
+    }
+
+    td {
+      background-color: #f1f2f6;
+    }
+
+    .missing-field {
+      background-color: #ffe6e6;
+      color: #e84118;
+      font-weight: bold;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .status-ok {
+      background-color: #eafbea;
+      color: #44bd32;
+    }
+
+    .status-missing {
+      background-color: #ffe6e6;
+      color: #e84118;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      background-color: #44bd32;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #4cd137;
+    }
+
+    .btn-group {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center; color:#2f3640; margin-top:20px;">
+    Compliance Report - Product {{ product['ProductID'] }}
+  </h1>
+
+  {% if missing_fields %}
+    <div style="max-width:700px; margin:20px auto; padding:15px; background-color:#ffe6e6; border:1px solid #e84118; border-radius:8px; text-align:center;">
+      <p style="font-weight:bold; color:#e84118; font-size:16px;">
+        ❌ The following fields are missing or empty:
+      </p>
+      <ul style="list-style-type:circle; padding-left:20px; text-align:left;">
+        {% for field in missing_fields %}
+          <li>{{ field }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <div style="max-width:700px; margin:20px auto; padding:15px; background-color:#eafbea; border:1px solid #44bd32; border-radius:8px; text-align:center;">
+      <p style="font-weight:bold; color:#44bd32; font-size:16px;">✅ All required fields are present!</p>
+    </div>
+  {% endif %}
+
+  <div style="max-width:900px; margin:30px auto; background-color:#fff; border-radius:8px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align:center; color:#2f3640;">Full Product Details</h2>
+    <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+      <tbody>
+        {% for key, value in product.items() %}
+          <tr>
+            <th style="text-align:left; padding:12px; border:1px solid #dcdde1; background-color:#2f3640; color:white; width:30%;">{{ key }}</th>
+            <td style="padding:12px; border:1px solid #dcdde1; background-color:#f1f2f6;">
+              {% if key in missing_fields %}
+                <span style="background-color:#ffe6e6; color:#e84118; font-weight:bold; padding:3px 8px; border-radius:12px;">❌ Missing</span>
+              {% else %}
+                <span style="background-color:#eafbea; color:#44bd32; font-weight:bold; padding:3px 8px; border-radius:12px;">✅ {{ value if value else 'Valid' }}</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="/check_product" style="display:inline-block; padding:10px 20px; margin:5px; background-color:#44bd32; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">Check Another Product</a>
+    <a href="/add-product" style="display:inline-block; padding:10px 20px; margin:5px; background-color:#44bd32; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">Add Product</a>
+    <a href="/dashboard" style="display:inline-block; padding:10px 20px; margin:5px; background-color:#44bd32; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">Go to Dashboard</a>
+  </div>
+</body>
+
+</html>

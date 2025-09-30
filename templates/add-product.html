@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Legal Metrology Portal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body class="main-layout">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-shield-fill text-primary me-3" style="font-size: 2rem;"></i>
+                    <h1 class="navbar-brand mb-0 text-dark">
+                        Legal Metrology Compliance Checker
+                    </h1>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center text-muted me-4">
+                        <i class="bi bi-person me-2"></i>
+                        <span class="small">user@example.com</span>
+                    </div>
+                    <a href="auth.html" class="d-flex align-items-center text-muted text-decoration-none">
+                        <i class="bi bi-box-arrow-right me-1"></i>
+                        <span class="small">Sign Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="p-4">
+                <ul class="nav flex-column sidebar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="dashboard.html">
+                            <i class="bi bi-house me-3"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="system-config.html">
+                            <i class="bi bi-gear me-3"></i>
+                            System Config
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="settings.html">
+                            <i class="bi bi-sliders me-3"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="mb-4">
+                <a href="dashboard.html" class="d-flex align-items-center text-muted text-decoration-none mb-3">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Back to Dashboard
+                </a>
+                <h1 class="h2 fw-bold text-dark">Add New Product</h1>
+                <p class="text-muted mt-2">Enter product details for Legal Metrology compliance</p>
+            </div>
+
+            <!-- Add Product Form -->
+            <div class="card">
+                <div class="card-body p-4">
+                    <form id="addProductForm" name="addProductForm" method="POST" action="/add_product">
+                        <div class="row g-4">
+
+                            <!-- Product ID -->
+                            <div class="col-md-6">
+                                <label for="productID" class="form-label fw-medium text-dark">Product ID</label>
+                                <input 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="productID" 
+                                    name="productID"
+                                    placeholder="Enter Product ID"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Brand Name -->
+                            <div class="col-12">
+                                <label for="brandName" class="form-label fw-medium text-dark">
+                                    Brand Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="brandName" 
+                                    name="brandName"
+                                    placeholder="e.g., Amul, Tata, Nestle"
+                                >
+                            </div>
+
+                            <!-- Category Dropdown -->
+                            <div class="col-md-6">
+                                <label for="category" class="form-label fw-medium text-dark">Category *</label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select category</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Cosmetics">Cosmetics</option>
+                                    <option value="Electronics">Electronics</option>
+                                </select>
+                            </div>
+
+                            <!-- Product Name -->
+                            <div class="col-md-6">
+                                <label for="productName" class="form-label fw-medium text-dark">
+                                    Product Name
+                                </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="productName" 
+                                    name="productName"
+                                    placeholder="e.g., Pure Ghee, Basmati Rice"
+
+                                >
+                            </div>
+
+                            <!-- Key Attribute -->
+                            <div class="col-md-6">
+                                <label for="keyAttribute" class="form-label fw-medium text-dark">
+                                    Key Attribute
+                                </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="keyAttribute" 
+                                    name="keyAttribute"
+                                    placeholder="e.g., Premium Quality, Organic"
+                                >
+                            </div>
+
+                            <!-- Generic Name -->
+                            <div class="col-md-6">
+                                <label for="genericName" class="form-label fw-medium text-dark">Generic Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="genericName" 
+                                    name="genericName"
+                                    placeholder="e.g., Clarified Butter"
+                                  
+                                >
+                            </div>
+
+                            <!-- Net Quantity -->
+                            <div class="col-md-6">
+                                <label for="netQuantity" class="form-label fw-medium text-dark">Net Quantity</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="netQuantity" 
+                                    name="netQuantity"
+                                    placeholder="e.g., 500g, 1kg, 250ml"
+                                    
+                                >
+                            </div>
+
+                            <!-- MRP -->
+                            <div class="col-md-6">
+                                <label for="mrp" class="form-label fw-medium text-dark">MRP (Inclusive of All Taxes) </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input 
+                                        type="number" 
+                                        class="form-control" 
+                                        id="mrp" 
+                                        name="mrp"
+                                        placeholder="299.00"
+                                        min="0" 
+                                        step="0.01" 
+                                       
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Date of Manufacture -->
+                            <div class="col-md-6">
+                                <label for="manufactureDate" class="form-label fw-medium text-dark">Date of Manufacture / Packing *</label>
+                                <input 
+                                    type="date" 
+                                    class="form-control" 
+                                    id="manufactureDate" 
+                                    name="manufactureDate"
+                                    required
+                                   
+                                >
+                            </div>
+
+                            <!-- Best Before -->
+                            <div class="col-md-6">
+                                <label for="bestBefore" class="form-label fw-medium text-dark">Best Before *</label>
+                                <input 
+                                    type="date" 
+                                    class="form-control" 
+                                    id="bestBefore" 
+                                    name="bestBefore"
+                                    required
+                                    
+                                >
+                            </div>
+
+                            <!-- Country of Origin -->
+                            <div class="col-md-6">
+                                <label for="countryOfOrigin" class="form-label fw-medium text-dark">Country of Origin *</label>
+                                <select class="form-select" id="countryOfOrigin" name="countryOfOrigin" required>
+                                    <option value="">Select country</option>
+                                    <option value="India">India</option>
+                                    <option value="USA">USA</option>
+                                    <option value="China">China</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Manufacturer -->
+                            <div class="col-12">
+                                <h6 class="fw-semibold text-dark mb-3 mt-4">Manufacturer Details</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="manufacturerName" class="form-label fw-medium text-dark">Manufacturer Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="manufacturerName" 
+                                    name="manufacturerName"
+                                    placeholder="Company Name"
+                                    
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="manufacturerAddress" class="form-label fw-medium text-dark">Manufacturer Address </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="manufacturerAddress" 
+                                    name="manufacturerAddress"
+                                    placeholder="Street Address"
+                                    
+                                >
+                            </div>
+
+                            <!-- Packer -->
+                            <div class="col-12">
+                                <h6 class="fw-semibold text-dark mb-3 mt-4">Packer Details (if different from manufacturer)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="packerName" class="form-label fw-medium text-dark">Packer Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="packerName" 
+                                    name="packerName"
+                                    placeholder="Company Name"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="packerAddress" class="form-label fw-medium text-dark">Packer Address</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="packerAddress" 
+                                    name="packerAddress"
+                                    placeholder="Street Address"
+                                >
+                            </div>
+
+                            <!-- Importer -->
+                            <div class="col-12">
+                                <h6 class="fw-semibold text-dark mb-3 mt-4">Importer Details (if imported product)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="importerName" class="form-label fw-medium text-dark">Importer Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="importerName" 
+                                    name="importerName"
+                                    placeholder="Company Name"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="importerAddress" class="form-label fw-medium text-dark">Importer Address</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="importerAddress" 
+                                    name="importerAddress"
+                                    placeholder="Street Address"
+                                >
+                            </div>
+
+                            <!-- Customer Care -->
+                            <div class="col-12">
+                                <h6 class="fw-semibold text-dark mb-3 mt-4">Customer Care Details</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="customerCareEmail" class="form-label fw-medium text-dark">Customer Care Email </label>
+                                <input 
+                                    type="email" 
+                                    class="form-control" 
+                                    id="customerCareEmail" 
+                                    name="customerCareEmail"
+                                    placeholder="support@company.com"
+                                   
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="customerCarePhone" class="form-label fw-medium text-dark">Customer Care Phone Number </label>
+                                <input 
+                                    type="tel" 
+                                    class="form-control" 
+                                    id="customerCarePhone" 
+                                    name="customerCarePhone"
+                                    placeholder="+91-22-12345678"
+                                   
+                                >
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="col-12 mt-5">
+                                <div class="d-flex justify-content-end gap-3">
+                                    <a href="dashboard.html" class="btn btn-secondary px-4">
+                                        Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        <i class="bi bi-save me-2"></i>
+                                        Add Product
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
